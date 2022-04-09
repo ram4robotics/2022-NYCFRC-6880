@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoBackupAndShoot;
 import frc.robot.commands.DriveDistance;
+import frc.robot.commands.DriveTrainTeleOp;
 import frc.robot.subsystems.ClimberElevator;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexer;
@@ -62,9 +63,11 @@ public class RobotContainer {
       CameraServer.startAutomaticCapture();
 
     // Configure the default commands
-    m_drive.setDefaultCommand( new RunCommand(
-      () -> m_drive.arcadeDrive(-(Math.pow(m_xbox1.getLeftY(), 2) * Math.signum(m_xbox1.getLeftY())), m_xbox1.getRightX()/3), m_drive));
-
+    // m_drive.setDefaultCommand( new RunCommand(
+    //   () -> m_drive.arcadeDrive(-(Math.pow(m_xbox1.getLeftY(), 2) * Math.signum(m_xbox1.getLeftY())), m_xbox1.getRightX()/3), m_drive));
+    m_drive.setDefaultCommand(new DriveTrainTeleOp(() -> m_xbox1.getLeftY(), 
+                                                   () -> m_xbox1.getRightX(), 
+                                                   m_drive));
   }
 
   /**
