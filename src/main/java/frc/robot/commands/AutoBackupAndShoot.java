@@ -20,7 +20,7 @@ public class AutoBackupAndShoot extends SequentialCommandGroup {
   /** Creates a new AutoBackupAndShoot. */
   public AutoBackupAndShoot(DriveTrain drive, Indexer index, Launcher launch, IntakeArm arm) {
     addCommands(
-      new DriveDistance(Units.inchesToMeters(40), -0.4, drive),
+      new DriveDistance(Units.inchesToMeters(58), -0.4, drive),
       new InstantCommand(
         () -> launch.launch(), launch),
       new OpenArm(arm),

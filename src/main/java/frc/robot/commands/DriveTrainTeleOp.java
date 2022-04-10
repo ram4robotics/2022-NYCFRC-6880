@@ -29,10 +29,11 @@ public class DriveTrainTeleOp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftY = m_leftY_Supplier.get();
+    double leftY = -m_leftY_Supplier.get();
     double rightX = m_rightXSupplier.get();
 
-    double newLeftY = Math.pow(leftY, 2) * Math.signum(leftY);
+    // double newLeftY = Math.pow(leftY, 2) * Math.signum(leftY);
+    double newLeftY = leftY;
     double newRightX = rightX / 2;
     m_drive.arcadeDrive(newLeftY, newRightX);
   }

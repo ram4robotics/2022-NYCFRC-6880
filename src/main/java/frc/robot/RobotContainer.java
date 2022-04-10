@@ -8,6 +8,7 @@ import static edu.wpi.first.wpilibj.XboxController.Button;
 
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -16,7 +17,6 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoBackupAndShoot;
-import frc.robot.commands.DriveDistance;
 import frc.robot.commands.DriveTrainTeleOp;
 import frc.robot.subsystems.ClimberElevator;
 import frc.robot.subsystems.DriveTrain;
@@ -43,6 +43,7 @@ public class RobotContainer {
   private final Launcher m_launcher = new Launcher(() -> m_xbox2.getPOV());
   private final ClimberElevator m_elevator = new ClimberElevator();
   private final DriveTrain m_drive = new DriveTrain();
+  public UsbCamera camera1, camera2;
   //private final DriveDistance m_simpleAuto = new DriveDistance(Units.inchesToMeters(92), -0.4, m_drive);
   private final AutoBackupAndShoot m_complexAuto = new AutoBackupAndShoot(m_drive, m_indexer, m_launcher, m_intakeArm);
 
@@ -59,8 +60,10 @@ public class RobotContainer {
 
     // Start the camera server
     // Note: CameraServer does not work in Simulation mode.
-    if (Robot.isReal())
-      CameraServer.startAutomaticCapture();
+    if (Robot.isReal()) {
+      camera1 = CameraServer.startAutomaticCapture(0);
+      camera2 = CameraServer.startAutomaticCapture(1);
+    }
 
     // Configure the default commands
     // m_drive.setDefaultCommand( new RunCommand(

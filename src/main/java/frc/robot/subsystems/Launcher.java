@@ -50,10 +50,10 @@ public class Launcher extends SubsystemBase {
   @Override
   public void periodic() {
     int povValue = m_povSupplier.get();
-    if (povValue == 180) {
+    if (povValue == 0) {
       launchHigh();
     } 
-    else if (povValue == 0) {
+    else if (povValue == 180) {
       launchLow();
     }
 

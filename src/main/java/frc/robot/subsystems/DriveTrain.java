@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 
@@ -42,6 +43,10 @@ public class DriveTrain extends SubsystemBase {
     m_left2.restoreFactoryDefaults();
     m_right1.restoreFactoryDefaults();
     m_right2.restoreFactoryDefaults();
+    m_left1.setIdleMode(IdleMode.kCoast);
+    m_left2.setIdleMode(IdleMode.kCoast);
+    m_right1.setIdleMode(IdleMode.kCoast);
+    m_right2.setIdleMode(IdleMode.kCoast);
     m_leftMotors = new MotorControllerGroup(m_left1, m_left2);
     m_rightMotors = new MotorControllerGroup(m_right1, m_right2);
     m_left1.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 500);
@@ -185,11 +190,13 @@ public class DriveTrain extends SubsystemBase {
    */
   public void toggleMaxOutput(){
     if(speed_mode) {
-      m_diffdrv.setMaxOutput(0.6);
+      m_diffdrv.setMaxOutput(0.3);
       speed_mode = false;
+      System.out.println("Drive Slow");
     } else {
-      m_diffdrv.setMaxOutput(0.8);
+      m_diffdrv.setMaxOutput(0.65);
       speed_mode = true;
+      System.out.println("Drive Fast");
     }
 }
 
